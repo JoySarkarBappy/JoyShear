@@ -1,0 +1,7 @@
+{
+  "name": "Joy Share",
+  "description": "A cross-platform peer-to-peer file-sharing web application using WebRTC.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
