@@ -1,17 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>JoyShare</title>
-</head>
-<body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joy Share</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
 
-<h2>JoyShare</h2>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-<button onclick="createRoom()">Create Room</button>
-<input id="roomInput" placeholder="Enter Room ID">
-<button onclick="joinRoom()">Join</button>
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "tracker-6a3e5.firebaseapp.com",
+  projectId: "tracker-6a3e5",
+  storageBucket: "tracker-6a3e5.appspot.com",
+  messagingSenderId: "340648817726",
+  appId: "1:340648817726:web:5b2d3aaf766348dd8c0d6f"
+};
 
-<script type="module" src="app.js"></script>
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-</body>
+console.log("Firebase connected ✅");
+
+</script>
+  </body>
 </html>
+
