@@ -19,7 +19,8 @@ const pc = new RTCPeerConnection({
 
 // CREATE ROOM
 window.createRoom = async () => {
-  const roomRef = await addDoc(collection(db, "rooms"), {});
+
+  roomRef = await addDoc(collection(db, "rooms"), {});
   const roomId = roomRef.id;
 
   alert("Room ID: " + roomId);
@@ -34,12 +35,23 @@ window.createRoom = async () => {
     }
   });
 
+  // 👇 ANSWER listen
   onSnapshot(roomRef, (snapshot) => {
     const data = snapshot.data();
     if (data?.answer) {
       pc.setRemoteDescription(new RTCSessionDescription(data.answer));
     }
   });
+
+  // 👇 ICE listen
+  onSnapshot(collection(roomRef, "candidates"), (snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+      if (change.type === "added") {
+        pc.addIceCandidate(new RTCIceCandidate(change.doc.data()));
+      }
+    });
+  });
+
 };
 let roomRef; // global বানাও
 
@@ -50,11 +62,11 @@ pc.onicecandidate = async (event) => {
 };
 // JOIN ROOM
 window.joinRoom = async () => {
+
   const roomId = document.getElementById("roomInput").value;
+  roomRef = doc(db, "rooms", roomId);
 
-  const roomRef = doc(db, "rooms", roomId);
   const roomSnapshot = await getDoc(roomRef);
-
   const offer = roomSnapshot.data().offer;
 
   await pc.setRemoteDescription(new RTCSessionDescription(offer));
@@ -68,4 +80,24 @@ window.joinRoom = async () => {
       sdp: answer.sdp
     }
   });
+
+  // 👇 ICE listen
+  onSnapshot(collection(roomRef, "candidates"), (snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+      if (change.type === "added") {
+        pc.addIceCandidate(new RTCIceCandidate(change.doc.data()));
+      }
+    });
+  });
+
 };
+const pc = new RTCPeerConnection({
+  iceServers: [
+    { urls: "stun:stun.l.google.com:19302" },
+    {
+      urls: "turn:openrelay.metered.ca:80",
+      username: "openrelayproject",
+      credential: "openrelayproject"
+    }
+  ]
+});
