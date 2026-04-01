@@ -41,7 +41,13 @@ window.createRoom = async () => {
     }
   });
 };
+let roomRef; // global বানাও
 
+pc.onicecandidate = async (event) => {
+  if (event.candidate) {
+    await addDoc(collection(roomRef, "candidates"), event.candidate.toJSON());
+  }
+};
 // JOIN ROOM
 window.joinRoom = async () => {
   const roomId = document.getElementById("roomInput").value;
