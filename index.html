@@ -1,13 +1,35 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Joy Share</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JoyShare</title>
+</head>
+<body>
 
+  <h1>Joy Share</h1>
+
+  <!-- 🔥 Firebase + WebRTC code এখানে -->
+  <script type="module">
+    
+    // ✅ Firebase import
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // ✅ তোমার Firebase config (console থেকে copy করবা)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+    };
+
+    // ✅ Firebase init
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    console.log("Firebase connected ✅");
+
+    // 👉 এখান থেকে WebRTC logic শুরু করবা
+
+  </script>
+
+</body>
+</html>
