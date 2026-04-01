@@ -7,26 +7,30 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module">
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBgNl25PCzv90FPSadjjNP46HL6-Tsjw-I",
+    authDomain: "tracker-6a3e5.firebaseapp.com",
+    projectId: "tracker-6a3e5",
+    storageBucket: "tracker-6a3e5.firebasestorage.app",
+    messagingSenderId: "340648817726",
+    appId: "1:340648817726:web:5b2d3aaf766348dd8c0d6f",
+    measurementId: "G-XFCMDPM8XE"
+  };
 
-const firebaseConfig = {
-  apiKey: "AIzaSy...",
-  authDomain: "tracker-6a3e5.firebaseapp.com",
-  projectId: "tracker-6a3e5",
-  storageBucket: "tracker-6a3e5.appspot.com",
-  messagingSenderId: "340648817726",
-  appId: "1:340648817726:web:5b2d3aaf766348dd8c0d6f"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-console.log("Firebase connected ✅");
-
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 </script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>
 
